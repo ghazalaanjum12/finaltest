@@ -41,7 +41,11 @@ function addColumn() {
     let rows = table.rows;
     let cols = table.rows[0].cells.length;
     for (let i = 0; i < rows.length; i++) {
-        rows[i].insertCell(cols).innerHTML = "Cell " + i + "," + cols;
+        let cell = rows[i].insertCell(cols);
+        cell.innerHTML = "Cell " + i + "," + cols;
+        if (cell.cellIndex === cols) {
+            cell.style.background = "#f0f0f0"; 
+        }
     }
 }
 
@@ -51,6 +55,10 @@ function addRow() {
     let newRow = table.insertRow(-1);
     let cols = table.rows[0].cells.length;
     for (let i = 0; i < cols; i++) {
-        newRow.insertCell(i).innerHTML = "Cell " + table.rows.length + "," + i;
+        let cell = newRow.insertCell(i);
+        cell.innerHTML = "Cell " + (table.rows.length - 1) + "," + i;
+        if (cell.parentNode.rowIndex === table.rows.length - 1) {
+            cell.style.background = "#f0f0f0";
+        }
     }
 }
